@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/Allchat_index.vue"),
+    component: () => import("@/views/index.vue"),
   },
 ];
 
