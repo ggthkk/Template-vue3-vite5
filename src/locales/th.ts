@@ -1,0 +1,181 @@
+export default {
+  form: {
+    validate: {
+      required: "กรุณากรอกข้อมูล",
+      chooseBank: "กรุณาเลือกธนาคาร",
+      choose: "กรุณาเลือกข้อมูล",
+    },
+    username: {
+      title: "ยูสเซอร์เนม",
+      placeholder: "กรอกยูสเซอร์เนม",
+      validate: {
+        minlength:
+          "ยูสเซอร์เนมต้องเป็นตัวอักษรภาษาอังกฤษพิมพ์เล็กและตัวเลข {minLength}-{maxLength} ตัว",
+        invalid:
+          "ยูสเซอร์เนมต้องเป็นตัวอักษรภาษาอังกฤษพิมพ์เล็กและตัวเลข {minLength}-{maxLength} ตัว",
+      },
+    },
+    phone_number: {
+      title: "เบอร์มือถือ",
+      titleConfirm: "ยืนยันเบอร์มือถือ",
+      placeholder: "กรอกเบอร์มือถือ",
+      validate: {
+        onlynumber: "กรอกได้เฉพาะตัวเลขเท่านั้น",
+        minlength: "กรุณากรอกเบอร์มือถือให้ครบ 10 หลัก",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        otpTimeout: "หมดเวลาในการยืนยัน OTP โปรดลองใหม่อีกครั้ง",
+      },
+      otpEnd: "ระบบจะทำการเข้าสู่ระบบใหม่อีกครั้ง",
+    },
+    password: {
+      title: "รหัสผ่าน",
+      placeholder: "กรอกรหัสผ่าน",
+      validate: {
+        minlength: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        invalidCharacther:
+          "รหัสผ่านต้องมีตัวอักษร {length} ตัว โดยมีตัวเลข ตัวอักษรภาษาอังกฤษพิมพ์เล็กและพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร",
+        samepassword: "กรุณากรอกรหัสผ่านให้ตรงกัน !",
+      },
+    },
+    password_old: {
+      title: "รหัสผ่านปัจจุบัน",
+      placeholder: "กรอกรหัสผ่านปัจจุบัน",
+      validate: {
+        minlength: "รหัสผ่านต้องมีความยาวอย่างน้อย {length} ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        invalidCharacther:
+          "รหัสผ่านต้องมีตัวอักษร {length} ตัว โดยมีตัวเลข ตัวอักษรภาษาอังกฤษพิมพ์เล็กและพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร",
+        samepassword: "กรุณากรอกรหัสผ่านให้ตรงกัน !",
+      },
+    },
+    password_new: {
+      title: "รหัสผ่านใหม่",
+      placeholder: "กรอกรหัสผ่านใหม่",
+      validate: {
+        minlength: "รหัสผ่านต้องมีความยาวอย่างน้อย {length} ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        invalidCharacther:
+          "รหัสผ่านต้องมีตัวอักษร {length} ตัว โดยมีตัวเลข ตัวอักษรภาษาอังกฤษพิมพ์เล็กและพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร",
+        samepassword: "กรุณากรอกรหัสผ่านให้ตรงกัน !",
+      },
+    },
+    password_repeat: {
+      title: "ยืนยันรหัสผ่าน",
+      placeholder: "กรอกรหัสผ่านอีกครั้ง",
+      validate: {
+        minlength: "รหัสผ่านต้องมีความยาวอย่างน้อย {length} ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+        invalidCharacther:
+          "รหัสผ่านต้องมีตัวอักษร {length} ตัว โดยมีตัวเลข ตัวอักษรภาษาอังกฤษพิมพ์เล็กและพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร",
+        samepassword: "กรุณากรอกรหัสผ่านให้ตรงกัน !",
+      },
+    },
+    bank_number: {
+      title: "เลขบัญชี",
+      uidNumber: "เลข UID",
+      trueNumber: "เบอร์ Truemoney Wallet",
+      placeholder: "กรุณากรอกเลขบัญชี",
+      validate: {
+        minlength: "เลขบัญชีต้องมีความยาวอย่างน้อย 10 ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+      },
+      title_truemoney: "หมายเลขบัญชี",
+      placeholder_truemoney: "กรุณากรอกเบอร์ Truemoney Wallet",
+      placeholder_peer2pay: "กรุณากรอกเลข UID",
+    },
+    bank_name: {
+      title: "ชื่อบัญชี",
+      placeholder: "กรุณากรอกชื่อบัญชี",
+      validate: {
+        minlength: "ชื่อบัญชีต้องมีความยาวอย่างน้อย {length} ตัวอักษร",
+        invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+      },
+    },
+    bank: {
+      title: "เลือกบัญชีธนาคาร",
+      placeholder: "กรุณาเลือกบัญชีธนาคาร",
+      notFound: "ไม่พบข้อมูลธนาคาร",
+    },
+    withdraw: {
+      title: "ถอนเงิน",
+      placeholder: "กรอกจำนวนที่ต้องการถอน",
+      label: "จำนวนที่ต้องการถอน",
+      minimumWithdraw: "ขั้นต่ำ {min} บาท",
+      canTake: "ยอดเงินที่ถอนได้",
+      time: "ถอนได้ช่วงเวลา",
+      validate: {
+        empty: "กรุณากรอกจำนวนที่ต้องการถอน",
+        invalid: "กรุณากรอกจำนวนเงินให้ถูกต้อง",
+        min: "ถอนขั้นต่ำ {min} บาท",
+        overAmount: "เครดิตของคุณมีจำนวนไม่เพียงพอในการทำรายการ",
+      },
+      all: "ถอนเงินทั้งหมด",
+      selectBank: "ถอนเครดิตเข้าบัญชี",
+      placeholderselectBank: "เลือกบัญชี",
+    },
+    amount: {
+      min: "ยอดเงินขั้นต่ำ {min} บาท",
+      max: "ยอดเงินไม่เกิน {max} บาท",
+    },
+    wheel: {
+      title: "กรอกเงิน",
+      placeholder: "กรอกจำนวนที่ต้องการถอน",
+      label: "จำนวนที่ต้องการถอน",
+      minimumWithdraw: "ขั้นต่ำ {min} บาท",
+      validate: {
+        empty: "กรุณากรอกจำนวนที่ต้องการถอน",
+        invalid: "กรุณากรอกจำนวนเงินให้ถูกต้อง",
+        min: "ถอนขั้นต่ำ {min} บาท",
+        overAmount: "เครดิตของคุณมีจำนวนไม่เพียงพอในการทำรายการ",
+      },
+      deposit: " ถอนเข้าเครดิต",
+      withdraw: "แลกเป็นเงินสด",
+    },
+    invalid: "กรุณากรอกข้อมูลให้ถูกต้อง",
+    onlyNumber: "กรอกได้เฉพาะตัวเลขเท่านั้น",
+    onlyChar: "กรุณากรอกข้อมูลเป็นตัวอักษรเท่านั้น",
+    onlyNumberEn: "กรุณากรอกข้อมูลเป็นตัวเลขหรือตัวอักษรภาษาอังกฤษเท่านั้น",
+    selectData: "กรุณาเลือกข้อมูล",
+  },
+  register: {
+    title: "สมัครสมาชิก",
+    here: "สมัครสมาชิกที่นี่",
+    ruleCondition: "เงื่อนไขการสมัครสมาชิก",
+    ruleConditionCheck: "ยอมรับเงื่อนไขการสมัครสมาชิก",
+    titleOtp: "ส่ง OTP",
+    haveAccount: "หรือ มีบัญชีแล้ว",
+    titleConfirmOtp: "OTP",
+    requestOtp: "ขอรหัส OTP",
+    labelOTP: "กรอกรหัส OTP 6 หลัก ที่ส่งไปยังเบอร์ของคุณ",
+    noReceiveOTP: "ไม่ได้รับรหัส OTP ?",
+    sendOTPAgain: "ส่งอีกครั้ง",
+    sendOtp: "รหัส OTP จะถูกส่งไปยังหมายเลข {number}",
+    labelCountdownOTP: "ส่งรหัส OTP ใหม่ได้อีกครั้ง",
+    exOTP: "หมดเวลาในการยืนยัน OTP โปรดลองใหม่อีกครั้ง",
+    titleSetPassword: "รหัสผ่าน",
+    passwordAgain: "กรอกรหัสผ่านอีกครั้ง",
+    requirePasswordInput: "กรุณากรอกรหัสผ่าน",
+    requirePasswordLength: "กรุณากรอกรหัสผ่าน 6 ตัว",
+    requireConfirmPasswordInput: "กรุณากรอกยืนยันรหัสผ่าน",
+    requirePasswordMatch: "กรุณากรอกรหัสผ่านให้ตรงกัน",
+    requirePasswordRules:
+      "รหัสผ่านต้องมีตัวอักษร 6 ตัว โดยมีตัวเลข ตัวอักษรภาษาอังกฤษพิมพ์เล็กและพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร",
+    titleBankaccount: "เลือกบัญชีธนาคารของท่าน",
+    signupSuccess: "สมัครสมาชิกเรียบร้อย",
+    selectAffiliate: "เลือกช่องทางที่รู้จักเรา",
+    cantRegister: "ไม่สามารถสมัครสมาชิกได้ในขณะนี้",
+    countTimeOtp: "กรุณากรอกรหัสภายในเวลา",
+    peer2payOtp: "ยืนยันการเพิ่มบัญชี Peer2Pay",
+    chooseBank: "เลือกธนาคาร",
+  },
+  login: {
+    title: "เข้าสู่ระบบ",
+    line: "เข้าสู่ระบบผ่านไลน์",
+    rememberMe: "จดจำฉันไว้ในระบบ",
+    forgotPassword: "ลืมรหัสผ่าน",
+    loginVialine: "เข้าสู่ระบบผ่านไลน์",
+    dontBeMember: "หรือ ยังไม่มีบัญชี",
+    orLogin: "หรือ เข้าสู่ระบบด้วย",
+  },
+};
