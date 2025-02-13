@@ -1,19 +1,5 @@
 <template>
-  <n-layout class="h-screen w-screen select-none">
-    <n-layout position="absolute" style="bottom: 130px" has-sider>
-      <n-layout content-style="padding: 24px;" :native-scrollbar="false">
-        <RouterView />
-      </n-layout>
-    </n-layout>
-    <n-layout-footer
-      class="!bg-transparent"
-      position="absolute"
-      style="height: 130px; padding: 24px"
-    >
-      <!-- <Footer2 /> -->
-    </n-layout-footer>
-  </n-layout>
-   <div class="h-screen flex-1 overflow-hidden">
+  <div class="h-screen flex-1 overflow-hidden">
     <!-- Main Content Area-->
     <div class="flex h-full flex-col justify-between">
       <div class="sticky top-0 w-full">
