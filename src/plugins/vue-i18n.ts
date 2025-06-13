@@ -1,16 +1,31 @@
-import { createI18n } from "vue-i18n";
-import messages from "@/locales/index";
-import numberFormats from "@/locales/numberFormat";
+import { createI18n } from 'vue-i18n'
+import messages from '@/locales/index'
+import numberFormats from '@/locales/numberFormat'
 
-const i18n = createI18n({
-  locale: "th",
-  fallbackLocale: "th",
+export interface MessageSchema {
+  common: {
+    ok: string
+    cancel: string
+  }
+  error: {
+    unknown: string
+    required: string
+  }
+  content: {
+    info: string
+  }
+  sidebar: {
+    dashboard: string
+  }
+}
+
+const i18n = createI18n<[MessageSchema], 'th'>({
+  legacy: false,
+  locale: 'th',
+  fallbackLocale: 'th',
+  globalInjection: true,
   messages: messages as any,
   numberFormats: numberFormats as any,
-  lazy: true,
-  silentTranslationWarn: true,
-  globalInjection: true,
-  legacy: false,
-});
+})
 
-export default i18n;
+export default i18n

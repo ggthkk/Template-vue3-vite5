@@ -1,183 +1,122 @@
-import api from "@/api-config";
+import helper from '@/utilities/helper'
+import { getApiInstance } from '@/api-config'
+import type { AxiosResponse } from 'axios'
+import { useCookies } from '@vueuse/integrations/useCookies'
+import * as T from '@/types'
+import { useAuthStore } from '@/stores/auth'
 
-import * as T from "@/types";
+const createAuthService = (
+  serviceDomain?: string,
+  serviceType: T.ApiInstance['serviceType'] = 'default',
+) => {
+  const api = getApiInstance(serviceDomain, serviceType)
 
-class AuthService {
-  public async login(
-    phone_number: string,
+  const removeTokenFromAllPaths = () => {
+    const cookie = useCookies(['token'])
+
+    const allPaths = [
+      '/',
+      '/agent',
+      ...location.pathname
+        .split('/')
+        .filter(Boolean)
+        .map((_, i, arr) => '/' + arr.slice(0, i + 1).join('/')),
+    ]
+
+    const uniquePaths = Array.from(new Set(allPaths))
+
+    uniquePaths.forEach((path) => {
+      cookie.remove('token', { path })
+    })
+  }
+
+  const login = async ({
+    username,
+    password,
+    code,
+  }: {
+    username: string
     password: string
-  ): Promise<T.Response> {
+    code?: string | null
+  }): Promise<T.LoginResponse> => {
     try {
-      const res = await api({
-        method: "POST",
-        url: `/login`,
-        data: {
-          phone_number,
-          password,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
+      const subdomain =
+        helper.getSubdomain() === 'mc-backoffice' ? 'ocenter' : helper.getSubdomain()
+      const payload = {
+        username,
+        password,
+        subdomain,
+        ...(code ? { code } : {}),
+      }
+
+      const response: AxiosResponse<T.LoginResponse> = await api.post('/auth/login', payload)
+
+      return response.data
+    } catch (error) {
+      console.warn('Login failed:', error)
+      throw error
     }
   }
 
-  public async loginToken(
-    phone_number: string,
-    token: string
-  ): Promise<T.Response> {
+  const logout = async () => {
+    const authStore = useAuthStore()
+
+    await api.post('/auth/logout')
+    removeTokenFromAllPaths()
+    authStore.loggedIn = false
+    authStore.user = {} as T.User
+    authStore.token = null
+  }
+
+  async function post2faAuthentication(): Promise<void> {
     try {
-      const res = await api({
-        method: "POST",
-        url: `/loginbytoken`,
-        data: {
-          phone_number,
-          token,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
+      const res = await api.get(`/user/two-factor-authentication`)
+      return res.data
+    } catch (error) {
+      console.warn('Post two-factor-authentication failed:', error)
+      throw error
     }
   }
 
-  public async loginLine(
-    code: string,
-    url: string,
-    ref_join: string,
-    ref_token: string,
-    hydra_id: string
-  ): Promise<T.Response> {
+  async function post2faCheck(payload: { code: string }): Promise<void> {
     try {
-      const res = await api({
-        method: "POST",
-        url: `/login_line`,
-        data: {
-          code,
-          url,
-          ref_join,
-          ref_token,
-          hydra_id,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
+      const res = await api.get(`/user/two-factor-check`, { data: payload })
+      return res.data
+    } catch (error) {
+      console.warn('Post 2fa check failed:', error)
+      throw error
+    }
+  }
+  async function post2faQRCode(): Promise<{ svg: string; url: string; firstqr: boolean }> {
+    try {
+      const res = await api.get(`/user/two-factor-qr-code`)
+      return res.data
+    } catch (error) {
+      console.warn('Post 2fa check failed:', error)
+      throw error
+    }
+  }
+  async function post2faRecoveryCode(): Promise<Array<string>> {
+    try {
+      const res = await api.get(`/user/two-factor-recovery-codes`)
+      return res.data
+    } catch (error) {
+      console.warn('Post 2fa check failed:', error)
+      throw error
     }
   }
 
-  public async isLogin(): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/is_login`,
-        token: true,
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
-  }
+  return {
+    login,
+    logout,
 
-  public async logout(): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/logout`,
-        token: true,
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
-  }
-
-  public async requestOtp(
-    phone_number: string,
-    register_type: string | ""
-  ): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/otp`,
-        token: true,
-        data: {
-          phone_number,
-          register_type,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
-  }
-
-  public async verifyOtp(
-    otp_code: string,
-    phone_number: string | ""
-  ): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/get/otp`,
-        data: {
-          otp_code,
-          phone_number,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
-  }
-
-  public async verifyOtpInside(
-    phone_number: string,
-    otp_code: string,
-    line_user_id: string | "",
-    register_type: string
-  ): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/get/otp_main`,
-        data: {
-          phone_number,
-          otp_code,
-          line_user_id,
-          register_type,
-        },
-        token: true,
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
-  }
-
-  public async register(payload: T.RegisterRequest): Promise<T.Response> {
-    try {
-      const res = await api({
-        method: "POST",
-        url: `/register`,
-        data: {
-          ...payload,
-        },
-      });
-      return res.data;
-    } catch (error: any) {
-      const err = error.response?.data;
-      return err;
-    }
+    post2faAuthentication,
+    post2faCheck,
+    post2faQRCode,
+    post2faRecoveryCode,
   }
 }
 
-export default new AuthService();
+const AuthService = createAuthService()
+
+export { createAuthService, AuthService }

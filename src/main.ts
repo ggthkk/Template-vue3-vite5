@@ -22,10 +22,10 @@ pinia.use(
   })
 );
 
-app.use(router); // Use Vue Router
-app.use(naive); // Use Naive UI
+app.use(router); 
+app.use(naive); 
 app.use(i18n);
 app.use(pinia);
 
-app.use(createPinia()); // Use Pinia store
-app.mount("#app"); // Mount the app to the element with ID "app"
+app.use(createPinia()); 
+app.mount("#app");

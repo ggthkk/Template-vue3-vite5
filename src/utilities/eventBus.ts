@@ -1,9 +1,7 @@
-// import { EventEmitter } from 'events'
-// export const eventBus = new EventEmitter()
-import mitt from "mitt";
+import mitt from 'mitt'
 
 type Events = {
-  openModal: void;
-};
+  [key: string]: any
+}
 
-export const eventBus = mitt<Events>();
+export const eventBus = mitt<Events>()
